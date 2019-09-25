@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Newsfy</string>
+    <string name="girl_reading">Girl Reading</string>
+    <string name="email_address">Email Address</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="log_in">Log in</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="need_an_account">Need a Newsfy account?</string>
+    <string name="email_address_hint">name@email.com</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in_to_account">Log in to your account</string>
+    <string name="quote">“Reading is essential for those who seek to rise above the ordinary.” – Jim Rohn</string>
+</resources>
