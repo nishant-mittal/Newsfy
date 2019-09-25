@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateAccountActivity">
@@ -30,5 +31,110 @@
         android:layout_marginBottom="15dp"
         android:background="@color/black"/>
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/poppins_medium"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center_horizontal"
+            android:text="@string/create_an_account"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/enter_details"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/name_sign_up_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#DAE0E2"
+            android:drawableEnd="@drawable/person_black"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="@string/enter_name"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/email_sign_up_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#DAE0E2"
+            android:drawableEnd="@drawable/email_black"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="@string/email_address_hint"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/password_sign_up_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#DAE0E2"
+            android:drawableEnd="@drawable/lock_black"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="@string/enter_password"
+            android:inputType="textPassword"/>
+
+        <EditText
+            android:id="@+id/confirm_password_sign_up_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#DAE0E2"
+            android:drawableEnd="@drawable/lock_black"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="@string/re_enter_password"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/create_account_button"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/create_free_account"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:elevation="5dp"/>
+
+    </LinearLayout>
+    </android.support.v7.widget.CardView>
     </LinearLayout>
 </ScrollView>
