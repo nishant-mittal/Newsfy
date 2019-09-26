@@ -31,7 +31,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private TextView signOutTextView;
-    ArrayList<News> mNews = new ArrayList<>();
+    public static ArrayList<News> mNews = new ArrayList<>();
     RequestQueue requestQueue;
     RecyclerView recyclerViewHorizontal;
     private RecyclerViewAdapterHorizontal mRecyclerViewAdapterHorizontal;
@@ -62,9 +62,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivity.this,SignInActivity.class);
+                startActivity(intent);
             }
         });
     }
+
+
 
     public void requestNews() {
         String url = "https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
@@ -100,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 String newsContent = main.getString("content");
-                                mNews.add(new News(newsImageURL, newsUrl, newsTitle[0], newsDate, newsAuthor, newsContent, newsSource));
+
+                                mNews.add(new News(newsImageURL, newsUrl, newsTitle[0], newsTimeAndDate[0], newsAuthor, newsContent, newsSource));
                             }
                             mRecyclerViewAdapterHorizontal = new RecyclerViewAdapterHorizontal(MainActivity.this, mNews);
                             HorizontalSpaceItemDecorator decorator = new HorizontalSpaceItemDecorator(22);
@@ -108,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(int position) {
                                     Intent intent = new Intent(MainActivity.this, NewsActivity.class);
+                                    intent.putExtra("position",position);
                                     startActivity(intent);
                                 }
                             });

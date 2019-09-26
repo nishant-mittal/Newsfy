@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <FrameLayout
@@ -17,6 +17,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/news_view_image"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -26,7 +27,84 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="225dp"
                 app:cardCornerRadius="30dp"
-                android:layout_height="600dp"/>
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/news_view_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingStart="20dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        tools:text="@string/sample_news"/>
+
+
+
+                        <TextView
+                            android:id="@+id/news_view_author_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingStart="20dp"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/blue"
+                            tools:text="Gloria Borger"
+                            />
+
+                        <TextView
+                            android:id="@+id/news_view_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:paddingStart="20dp"
+                            tools:text="24 Sep,2019"/>
+
+
+                    <TextView
+                        android:id="@+id/news_view_content"
+                        android:paddingTop="6dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="4dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/news_sample"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/news_view_website_link"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/blue"
+                        tools:text="Go to website"/>
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:backgroundTint="@color/red"
+                        android:src="@drawable/share_icon"
+                        android:layout_gravity="end"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </FrameLayout>
     </LinearLayout>
 
