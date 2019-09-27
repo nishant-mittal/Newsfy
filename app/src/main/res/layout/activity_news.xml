@@ -97,7 +97,6 @@
                         tools:text="Go to website"/>
 
                     <android.support.design.widget.FloatingActionButton
-                        android:backgroundTint="@color/red"
                         android:src="@drawable/share_icon"
                         android:layout_gravity="end"
                         android:layout_margin="10dp"

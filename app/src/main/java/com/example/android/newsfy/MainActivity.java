@@ -25,9 +25,12 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private TextView signOutTextView;
@@ -62,16 +65,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MainActivity.this,SignInActivity.class);
+                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(intent);
             }
         });
     }
 
 
-
     public void requestNews() {
-        String url = "https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
+        String url = "https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
 
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -86,26 +88,36 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject source = main.getJSONObject("source");
                                 String newsSource = source.getString("name");
                                 String newsAuthor = main.getString("author");
-                                String title = main.getString("title");
-                                String[] newsTitle = title.split("-");
+                                String newsTitle = main.getString("title");
                                 String newsImageURL = main.getString("urlToImage");
                                 String newsUrl = main.getString("url");
                                 String timeFromApi = main.getString("publishedAt");
                                 String time = timeFromApi.substring(0, timeFromApi.length() - 1);
+
+
                                 String[] newsTimeAndDate = time.split("T");
-                                Log.d("lol", "onResponse: " + newsTimeAndDate[0] + "\n" + newsTimeAndDate[1]);
-                                String newsDate = "";
-                                //String[] newsTime = newsTimeAndDate[1].split("+");
+                                Log.d("lol", "Time ->" + newsTimeAndDate[1]);
+                                String formattedDate = "";
+
                                 try {
-                                    Date date = new SimpleDateFormat("yyyy-MM-dd").parse(newsTimeAndDate[0]);
-                                    newsDate = newsDate + date;
-                                    Log.d("lol", "on: " + newsTimeAndDate[0]);
+                                    /*Date date = new SimpleDateFormat("yyyy-MM-dd").parse(newsTimeAndDate[0]);
+                                    newsDate = newsDate + date;*/
+                                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                    SimpleDateFormat outputFormat = new SimpleDateFormat("MMM d, yyyy");
+                                    Date date = inputFormat.parse(newsTimeAndDate[0]);
+                                    formattedDate = outputFormat.format(date);
+                                    formattedDate += "  ";
+
+                                    SimpleDateFormat inputTime = new SimpleDateFormat("HH:mm:ss");
+                                    SimpleDateFormat outputTime = new SimpleDateFormat("h:mm a");
+                                    Date formattedTime = inputTime.parse(newsTimeAndDate[1]);
+                                    formattedDate += outputTime.format(formattedTime);
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
                                 String newsContent = main.getString("content");
 
-                                mNews.add(new News(newsImageURL, newsUrl, newsTitle[0], newsTimeAndDate[0], newsAuthor, newsContent, newsSource));
+                                mNews.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, newsContent, newsSource));
                             }
                             mRecyclerViewAdapterHorizontal = new RecyclerViewAdapterHorizontal(MainActivity.this, mNews);
                             HorizontalSpaceItemDecorator decorator = new HorizontalSpaceItemDecorator(22);
@@ -113,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(int position) {
                                     Intent intent = new Intent(MainActivity.this, NewsActivity.class);
-                                    intent.putExtra("position",position);
+                                    intent.putExtra("position", position);
                                     startActivity(intent);
                                 }
                             });
