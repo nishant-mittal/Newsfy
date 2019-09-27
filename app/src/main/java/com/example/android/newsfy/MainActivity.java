@@ -53,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
         requestNews();
 
         recyclerViewHorizontal = findViewById(R.id.news_recycler_view_horizontal);
-        //requestNews();
-        /*for(int i = 0; i < mNews.size(); i++) {
-            Log.d("lol", "News " + mNews.get(i).getNewsAuthor() + "\n" + mNews.get(i).getNewsImageURL());
-        }*/
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewHorizontal.setLayoutManager(manager);
         signOutTextView = findViewById(R.id.sign_out);
@@ -74,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void requestNews() {
         String url = "https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
-
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -96,12 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                                 String[] newsTimeAndDate = time.split("T");
-                                Log.d("lol", "Time ->" + newsTimeAndDate[1]);
                                 String formattedDate = "";
 
                                 try {
-                                    /*Date date = new SimpleDateFormat("yyyy-MM-dd").parse(newsTimeAndDate[0]);
-                                    newsDate = newsDate + date;*/
                                     SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
                                     SimpleDateFormat outputFormat = new SimpleDateFormat("MMM d, yyyy");
                                     Date date = inputFormat.parse(newsTimeAndDate[0]);
@@ -116,8 +107,11 @@ public class MainActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 String newsContent = main.getString("content");
+                                int index = newsContent.indexOf("[");
+                                String newsContentDisplay = newsContent.substring(0, index);
+                                Log.d("lol", "index" + index);
 
-                                mNews.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, newsContent, newsSource));
+                                mNews.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, newsContentDisplay, newsSource));
                             }
                             mRecyclerViewAdapterHorizontal = new RecyclerViewAdapterHorizontal(MainActivity.this, mNews);
                             HorizontalSpaceItemDecorator decorator = new HorizontalSpaceItemDecorator(22);

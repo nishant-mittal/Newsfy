@@ -1,7 +1,9 @@
 package com.example.android.newsfy;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,12 +19,12 @@ public class NewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news);
         ImageView newsImageView;
         TextView newsTitle;
-        TextView newsAuthor;
+        final TextView newsAuthor;
         TextView newsDate;
         TextView newsContent;
         TextView newsWebLink;
 
-        int position = getIntent().getExtras().getInt("position");
+        final int position = getIntent().getExtras().getInt("position");
 
         newsImageView = findViewById(R.id.news_view_image);
         newsTitle = findViewById(R.id.news_view_title);
@@ -36,7 +38,15 @@ public class NewsActivity extends AppCompatActivity {
         newsAuthor.setText(MainActivity.mNews.get(position).getNewsAuthor());
         newsDate.setText(MainActivity.mNews.get(position).getNewsTime());
         newsContent.setText(MainActivity.mNews.get(position).getNewsContent());
-        newsWebLink.setText(MainActivity.mNews.get(position).getNewsUrl());
+
+        newsWebLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewsActivity.this, NewsDisplayActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
 
     }
 }
