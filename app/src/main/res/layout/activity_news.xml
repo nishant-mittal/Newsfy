@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,48 +7,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".NewsActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="end|bottom"
+        android:layout_margin="15dp"
+        android:backgroundTint="@color/red"
+        android:elevation="0dp"
+        android:scaleType="center"
+        android:src="@drawable/share_icon"/>
 
-        <FrameLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/news_view_image"
-                android:scaleType="centerCrop"
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                tools:src="@drawable/sample"/>
+                android:layout_height="match_parent">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_marginTop="225dp"
-                app:cardCornerRadius="30dp"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/news_view_image"
+                    android:scaleType="centerCrop"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="250dp"
+                    tools:src="@drawable/sample"/>
 
-                    <TextView
-                        android:id="@+id/news_view_title"
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="225dp"
+                    app:cardCornerRadius="30dp"
+                    android:layout_height="wrap_content">
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:paddingStart="20dp"
-                        android:paddingTop="4dp"
-                        android:paddingEnd="8dp"
-                        android:layout_marginBottom="2dp"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textSize="27sp"
-                        android:textStyle="bold"
-                        tools:text="@string/sample_news"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/news_view_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingStart="20dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="27sp"
+                            android:textStyle="bold"
+                            tools:text="@string/sample_news"/>
 
 
                         <TextView
@@ -74,39 +91,39 @@
                             tools:text="24 Sep,2019"/>
 
 
-                    <TextView
-                        android:id="@+id/news_view_content"
-                        android:paddingTop="10dp"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="4dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/news_sample"
-                        android:textSize="20sp"/>
+                        <TextView
+                            android:id="@+id/news_view_content"
+                            android:paddingTop="10dp"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="4dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/news_sample"
+                            android:textSize="20sp"/>
 
-                    <TextView
-                        android:id="@+id/news_view_website_link"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="12dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/rounded_button_blue"
-                        android:fontFamily="@font/poppins_medium"
-                        android:gravity="center"
-                        android:paddingLeft="12dp"
-                        android:paddingTop="6dp"
-                        android:paddingRight="12dp"
-                        android:text="Read full article here"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/news_view_website_link"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="12dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/rounded_button_blue"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:paddingLeft="12dp"
+                            android:paddingTop="6dp"
+                            android:paddingRight="12dp"
+                            android:text="Read full article here"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
 
 
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </FrameLayout>
-    </LinearLayout>
-
-</ScrollView>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>
