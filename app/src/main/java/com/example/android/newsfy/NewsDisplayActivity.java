@@ -14,9 +14,19 @@ public class NewsDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news_display);
 
         int position = getIntent().getExtras().getInt("position");
+        int news = getIntent().getExtras().getInt("news");
+
         WebView webView = findViewById(R.id.web_view);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(MainActivity.mNews.get(position).getNewsUrl());
+
+        switch (news) {
+            case 0:
+                webView.loadUrl(MainActivity.mNews.get(position).getNewsUrl());
+                break;
+            case 1:
+                webView.loadUrl(MainActivity.mNewsVertical.get(position).getNewsUrl());
+                break;
+        }
         WebSettings webSettings = webView.getSettings();
     }
 }

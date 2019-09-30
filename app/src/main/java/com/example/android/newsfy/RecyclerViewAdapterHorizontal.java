@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapterHorizontal extends RecyclerView.Adapter<RecyclerViewAdapterHorizontal.ViewHolder> {
-    private ArrayList<News> newsList = new ArrayList<>();
+    private ArrayList<News> newsList;
     private Context mContext;
     private Listener mListener;
     public RecyclerViewAdapterHorizontal(Context context,ArrayList<News> newsList) {

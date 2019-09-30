@@ -1,6 +1,7 @@
 package com.example.android.newsfy;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,9 +36,14 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private TextView signOutTextView;
     public static ArrayList<News> mNews = new ArrayList<>();
+    public static ArrayList<News> mNewsVertical = new ArrayList<>();
     RequestQueue requestQueue;
+
     RecyclerView recyclerViewHorizontal;
+    RecyclerView recyclerViewVertical;
+
     private RecyclerViewAdapterHorizontal mRecyclerViewAdapterHorizontal;
+    RecyclerViewAdapterVertical mRecyclerViewAdapterVertical;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +57,20 @@ public class MainActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
         requestNews();
+        requestNewsVertical();
 
         recyclerViewHorizontal = findViewById(R.id.news_recycler_view_horizontal);
+        recyclerViewHorizontal.setHasFixedSize(true);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewHorizontal.setLayoutManager(manager);
         signOutTextView = findViewById(R.id.sign_out);
+
+        recyclerViewVertical = findViewById(R.id.news_recycler_view_vertical);
+        recyclerViewVertical.setHasFixedSize(true);
+        recyclerViewVertical.setNestedScrollingEnabled(false);
+        LinearLayoutManager manager1 = new LinearLayoutManager(this);
+        recyclerViewVertical.setLayoutManager(manager1);
+
 
         signOutTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,11 +122,14 @@ public class MainActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 String newsContent = main.getString("content");
-                                int index = newsContent.indexOf("[");
-                                String newsContentDisplay = newsContent.substring(0, index);
-                                Log.d("lol", "index" + index);
-
-                                mNews.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, newsContentDisplay, newsSource));
+                                int index = newsContent.indexOf('[');
+                                String actualNews = "";
+                                if (index != -1) {
+                                    actualNews = newsContent.substring(0, index);
+                                }
+                                //String newsContentDisplay = newsContent.substring(0, index);
+                                //Log.d("lol", "Data" + "\n" + newsImageURL + "\n" + newsUrl + "\n" + newsTitle + "\n" +formattedDate + "\n" + newsAuthor + "\n" + newsContentDisplay+ "\n" + newsSource);
+                                mNews.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, actualNews, newsSource));
                             }
                             mRecyclerViewAdapterHorizontal = new RecyclerViewAdapterHorizontal(MainActivity.this, mNews);
                             HorizontalSpaceItemDecorator decorator = new HorizontalSpaceItemDecorator(22);
@@ -120,11 +138,13 @@ public class MainActivity extends AppCompatActivity {
                                 public void onClick(int position) {
                                     Intent intent = new Intent(MainActivity.this, NewsActivity.class);
                                     intent.putExtra("position", position);
+                                    intent.putExtra("news", 0);
                                     startActivity(intent);
                                 }
                             });
                             recyclerViewHorizontal.addItemDecoration(decorator);
                             recyclerViewHorizontal.setAdapter(mRecyclerViewAdapterHorizontal);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -137,6 +157,89 @@ public class MainActivity extends AppCompatActivity {
         });
 
         requestQueue.add(request);
+    }
 
+    public void requestNewsVertical() {
+        String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray articles = response.getJSONArray("articles");
+
+                            for (int i = 0; i < articles.length(); i++) {
+                                JSONObject main = articles.getJSONObject(i);
+                                JSONObject source = main.getJSONObject("source");
+                                String newsSource = source.getString("name");
+                                String newsAuthor = main.getString("author");
+                                String newsTitle = main.getString("title");
+                                String newsImageURL = main.getString("urlToImage");
+                                String newsUrl = main.getString("url");
+                                String timeFromApi = main.getString("publishedAt");
+                                String time = timeFromApi.substring(0, timeFromApi.length() - 1);
+
+                                if (newsAuthor.equals("null")) {
+                                    newsAuthor = "NA";
+                                }
+
+                                String[] newsTimeAndDate = time.split("T");
+                                String formattedDate = "";
+
+                                try {
+                                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                    SimpleDateFormat outputFormat = new SimpleDateFormat("MMM d, yyyy");
+                                    Date date = inputFormat.parse(newsTimeAndDate[0]);
+                                    formattedDate = outputFormat.format(date);
+                                    formattedDate += "  ";
+
+                                    SimpleDateFormat inputTime = new SimpleDateFormat("HH:mm:ss");
+                                    SimpleDateFormat outputTime = new SimpleDateFormat("h:mm a");
+                                    Date formattedTime = inputTime.parse(newsTimeAndDate[1]);
+                                    formattedDate += outputTime.format(formattedTime);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                String newsContent = main.getString("content");
+                                int index = newsContent.indexOf('[');
+                                String actualNews = "";
+                                if (index != -1) {
+                                    actualNews = newsContent.substring(0, index);
+                                }
+                                //String newsContentDisplay = newsContent.substring(0, index);
+                                //Log.d("lol", "Data" + "\n" + newsImageURL + "\n" + newsUrl + "\n" + newsTitle + "\n" +formattedDate + "\n" + newsAuthor + "\n" + newsContentDisplay+ "\n" + newsSource);
+                                mNewsVertical.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, actualNews, newsSource));
+                            }
+                            mRecyclerViewAdapterVertical = new RecyclerViewAdapterVertical(MainActivity.this, mNewsVertical);
+                            mRecyclerViewAdapterVertical.setListener(new RecyclerViewAdapterVertical.Listener() {
+                                @Override
+                                public void onClick(int position) {
+                                    Intent intent = new Intent(MainActivity.this, NewsActivity.class);
+                                    intent.putExtra("position", position);
+                                    intent.putExtra("news", 1);
+                                    startActivity(intent);
+                                }
+                            });
+
+                            recyclerViewVertical.setAdapter(mRecyclerViewAdapterVertical);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(request);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }
