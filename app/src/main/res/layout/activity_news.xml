@@ -42,9 +42,9 @@
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_marginTop="225dp"
+                    android:layout_height="match_parent"
                     app:cardCornerRadius="30dp"
-                    android:layout_height="wrap_content">
+                    android:layout_marginTop="224dp">
 
 
                     <LinearLayout
@@ -90,6 +90,17 @@
                             android:paddingStart="20dp"
                             tools:text="24 Sep,2019"/>
 
+                        <TextView
+                            android:id="@+id/news_view_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingStart="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="4dp"
+                            android:textColor="#2d3436"
+                            android:textSize="19sp"
+                            tools:text="@string/local_news"/>
 
                         <TextView
                             android:id="@+id/news_view_content"
@@ -100,7 +111,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             tools:text="@string/news_sample"
-                            android:textSize="20sp"/>
+                            android:textSize="18sp"/>
 
                         <TextView
                             android:id="@+id/news_view_website_link"
@@ -108,7 +119,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="12dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
+                            android:layout_marginBottom="12dp"
                             android:background="@drawable/rounded_button_blue"
                             android:fontFamily="@font/poppins_medium"
                             android:gravity="center"

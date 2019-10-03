@@ -8,8 +8,9 @@ public class News {
     private String newsAuthor;
     private String newsContent;
     private String newsSource;
+    private String newsDescription;
 
-    public News(String newsImageURL, String newsUrl ,String newsTitle, String newsTime, String newsAuthor, String newsContent,String newsSource) {
+    public News(String newsImageURL, String newsUrl, String newsTitle, String newsTime, String newsAuthor, String newsContent, String newsSource, String newsDescription) {
         this.newsImageURL = newsImageURL;
         this.newsUrl = newsUrl;
         this.newsTitle = newsTitle;
@@ -17,6 +18,7 @@ public class News {
         this.newsAuthor = newsAuthor;
         this.newsContent = newsContent;
         this.newsSource = newsSource;
+        this.newsDescription = newsDescription;
     }
 
     public News() {
@@ -48,5 +50,9 @@ public class News {
 
     public String getNewsSource() {
         return newsSource;
+    }
+
+    public String getNewsDescription() {
+        return newsDescription;
     }
 }

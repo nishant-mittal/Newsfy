@@ -34,7 +34,9 @@ import java.util.Date;
 public class SignInActivity extends AppCompatActivity {
     private static final String TAG = "SignInActivity";
     private EditText mUserEmail, mUserPassword;
+    FirebaseUser user;
     private FirebaseAuth mAuth;
+    private TextView forgotPassword;
 
     /*RequestQueue requestQueueVertical;
     public static ArrayList<News> mNewsVertical = new ArrayList<>();*/
@@ -43,11 +45,22 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         mUserEmail = findViewById(R.id.email_sign_in_edit_text);
         mUserPassword = findViewById(R.id.password_sign_in_edit_text);
         mAuth = FirebaseAuth.getInstance();
-        /*requestQueueVertical = Volley.newRequestQueue(this);
-        requestNewsVertical();*/
+
+        forgotPassword = findViewById(R.id.forgot_password_text_view);
+
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
     }
 
     @Override
@@ -93,58 +106,9 @@ public class SignInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*public void requestNewsVertical() {
-        String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray articles = response.getJSONArray("articles");
-
-                    for (int i = 0; i < articles.length(); i++) {
-                        JSONObject main = articles.getJSONObject(i);
-                        JSONObject source = main.getJSONObject("source");
-                        String newsSource = source.getString("name");
-                        String newsAuthor = main.getString("author");
-                        String newsTitle = main.getString("title");
-                        String newsImageURL = main.getString("urlToImage");
-                        String newsUrl = main.getString("url");
-                        String timeFromApi = main.getString("publishedAt");
-                        String time = timeFromApi.substring(0, timeFromApi.length() - 1);
-
-                        String[] newsTimeAndDate = time.split("T");
-                        String formattedDate = "";
-
-                        try {
-                            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                            SimpleDateFormat outputFormat = new SimpleDateFormat("MMM d, yyyy");
-                            Date date = inputFormat.parse(newsTimeAndDate[0]);
-                            formattedDate = outputFormat.format(date);
-                            formattedDate += "  ";
-
-                            SimpleDateFormat inputTime = new SimpleDateFormat("HH:mm:ss");
-                            SimpleDateFormat outputTime = new SimpleDateFormat("h:mm a");
-                            Date formattedTime = inputTime.parse(newsTimeAndDate[1]);
-                            formattedDate += outputTime.format(formattedTime);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        String newsContent = main.getString("content");
-                        int index = newsContent.indexOf("[");
-                        String newsContentDisplay = newsContent.substring(0, index);
-                        mNewsVertical.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, newsContentDisplay, newsSource));
-                        Log.d("hi", "Data:" + "\n" + mNewsVertical.get(i).getNewsImageURL() + "\n" + mNewsVertical.get(i).getNewsUrl());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        requestQueueVertical.add(jsonObjectRequest);
-    }*/
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

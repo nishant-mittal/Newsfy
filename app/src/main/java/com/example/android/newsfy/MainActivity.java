@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<News> mNews = new ArrayList<>();
     public static ArrayList<News> mNewsVertical = new ArrayList<>();
     RequestQueue requestQueue;
-
     RecyclerView recyclerViewHorizontal;
     RecyclerView recyclerViewVertical;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         requestNewsVertical();
 
         recyclerViewHorizontal = findViewById(R.id.news_recycler_view_horizontal);
-        recyclerViewHorizontal.setHasFixedSize(true);
+        //recyclerViewHorizontal.setHasFixedSize(true);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewHorizontal.setLayoutManager(manager);
         signOutTextView = findViewById(R.id.sign_out);
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         signOutTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(intent);
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject main = articles.getJSONObject(i);
                                 JSONObject source = main.getJSONObject("source");
                                 String newsSource = source.getString("name");
+                                String newsDescription = main.getString("description");
                                 String newsAuthor = main.getString("author");
                                 String newsTitle = main.getString("title");
                                 String newsImageURL = main.getString("urlToImage");
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 //String newsContentDisplay = newsContent.substring(0, index);
                                 //Log.d("lol", "Data" + "\n" + newsImageURL + "\n" + newsUrl + "\n" + newsTitle + "\n" +formattedDate + "\n" + newsAuthor + "\n" + newsContentDisplay+ "\n" + newsSource);
-                                mNews.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, actualNews, newsSource));
+                                mNews.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, actualNews, newsSource, newsDescription));
                             }
                             mRecyclerViewAdapterHorizontal = new RecyclerViewAdapterHorizontal(MainActivity.this, mNews);
                             HorizontalSpaceItemDecorator decorator = new HorizontalSpaceItemDecorator(22);
@@ -160,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void requestNewsVertical() {
-        String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
+        String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=9582fd2f638d4fad9c6b03df774b39ae";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -174,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                                 String newsSource = source.getString("name");
                                 String newsAuthor = main.getString("author");
                                 String newsTitle = main.getString("title");
+                                String newsDescription = main.getString("description");
                                 String newsImageURL = main.getString("urlToImage");
                                 String newsUrl = main.getString("url");
                                 String timeFromApi = main.getString("publishedAt");
@@ -206,9 +209,10 @@ public class MainActivity extends AppCompatActivity {
                                 if (index != -1) {
                                     actualNews = newsContent.substring(0, index);
                                 }
+
                                 //String newsContentDisplay = newsContent.substring(0, index);
                                 //Log.d("lol", "Data" + "\n" + newsImageURL + "\n" + newsUrl + "\n" + newsTitle + "\n" +formattedDate + "\n" + newsAuthor + "\n" + newsContentDisplay+ "\n" + newsSource);
-                                mNewsVertical.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, actualNews, newsSource));
+                                mNewsVertical.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, actualNews, newsSource, newsDescription));
                             }
                             mRecyclerViewAdapterVertical = new RecyclerViewAdapterVertical(MainActivity.this, mNewsVertical);
                             mRecyclerViewAdapterVertical.setListener(new RecyclerViewAdapterVertical.Listener() {

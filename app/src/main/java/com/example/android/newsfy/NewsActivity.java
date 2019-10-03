@@ -24,6 +24,7 @@ public class NewsActivity extends AppCompatActivity {
         TextView newsDate;
         TextView newsContent;
         TextView newsWebLink;
+        TextView newsDescription;
         FloatingActionButton floatingActionButton;
         final int position = getIntent().getExtras().getInt("position");
         int news = getIntent().getExtras().getInt("news");
@@ -34,6 +35,8 @@ public class NewsActivity extends AppCompatActivity {
         newsDate = findViewById(R.id.news_view_date);
         newsContent = findViewById(R.id.news_view_content);
         newsWebLink = findViewById(R.id.news_view_website_link);
+        newsDescription = findViewById(R.id.news_view_description);
+
         floatingActionButton = findViewById(R.id.floating_action_button);
 
         switch (news) {
@@ -43,6 +46,7 @@ public class NewsActivity extends AppCompatActivity {
                 newsAuthor.setText(MainActivity.mNews.get(position).getNewsAuthor());
                 newsDate.setText(MainActivity.mNews.get(position).getNewsTime());
                 newsContent.setText(MainActivity.mNews.get(position).getNewsContent());
+                newsDescription.setText(MainActivity.mNews.get(position).getNewsDescription());
 
                 newsWebLink.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -76,6 +80,7 @@ public class NewsActivity extends AppCompatActivity {
                 newsAuthor.setText(MainActivity.mNewsVertical.get(position).getNewsAuthor());
                 newsDate.setText(MainActivity.mNewsVertical.get(position).getNewsTime());
                 newsContent.setText(MainActivity.mNewsVertical.get(position).getNewsContent());
+                newsDescription.setText(MainActivity.mNewsVertical.get(position).getNewsDescription());
 
                 newsWebLink.setOnClickListener(new View.OnClickListener() {
                     @Override

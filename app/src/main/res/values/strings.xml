@@ -6,6 +6,7 @@
     <string name="enter_name">Enter Name</string>
     <string name="enter_email">Enter Email!</string>
     <string name="log_in">Log in</string>
+    <string name="check_your_email">Check your Email</string>
     <string name="sign_out">Sign Out</string>
     <string name="refresh">Refresh</string>
     <string name="local_news">Local News</string>
