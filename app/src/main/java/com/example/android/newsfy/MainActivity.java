@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Performs an http request for world news
     public void requestNews() {
-        String url = "https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
+        String url = "https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&api";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Performs an http request for local news
     public void requestNewsVertical() {
-        String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=9582fd2f638d4fad9c6b03df774b39ae";
+        String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
