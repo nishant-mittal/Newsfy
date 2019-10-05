@@ -13,20 +13,26 @@ public class NewsDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_display);
 
+        //Gets position of news card Clicked
         int position = getIntent().getExtras().getInt("position");
+
+        //Stores which news was called, World/Local
         int news = getIntent().getExtras().getInt("news");
 
         WebView webView = findViewById(R.id.web_view);
         webView.setWebViewClient(new WebViewClient());
 
         switch (news) {
+
+            //If world news was clicked
             case 0:
                 webView.loadUrl(MainActivity.mNews.get(position).getNewsUrl());
                 break;
+
+            //If local news was clicked
             case 1:
                 webView.loadUrl(MainActivity.mNewsVertical.get(position).getNewsUrl());
                 break;
         }
-        WebSettings webSettings = webView.getSettings();
     }
 }

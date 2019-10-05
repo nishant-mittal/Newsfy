@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapterVertical extends RecyclerView.Adapter<RecyclerViewAdapterVertical.ViewHolder> {
+
     Listener mListener;
     private ArrayList<News> mNews;
     private Context mContext;
@@ -30,6 +31,7 @@ public class RecyclerViewAdapterVertical extends RecyclerView.Adapter<RecyclerVi
 
     @NonNull
     @Override
+
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.news_card_vertical, viewGroup, false);
         return new ViewHolder(v);
@@ -42,7 +44,6 @@ public class RecyclerViewAdapterVertical extends RecyclerView.Adapter<RecyclerVi
         Picasso.get().load(news.getNewsImageURL()).fit().centerInside().into(viewHolder.newsImage);
         viewHolder.newsTitle.setText(mNews.get(i).getNewsTitle());
         viewHolder.newsSource.setText(mNews.get(i).getNewsSource());
-        //viewHolder.newsTime.setText(mNews.get(i).getNewsTime());
 
         newsCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +68,6 @@ public class RecyclerViewAdapterVertical extends RecyclerView.Adapter<RecyclerVi
         private ImageView newsImage;
         private TextView newsTitle;
         private TextView newsSource;
-        //private TextView newsTime;
         private CardView newsCard;
 
         public ViewHolder(@NonNull View itemView) {
@@ -76,7 +76,6 @@ public class RecyclerViewAdapterVertical extends RecyclerView.Adapter<RecyclerVi
             newsImage = itemView.findViewById(R.id.news_card_vertical_news_image);
             newsTitle = itemView.findViewById(R.id.news_card_vertical_news_title);
             newsSource = itemView.findViewById(R.id.news_card_vertical_news_source);
-            //newsTime = itemView.findViewById(R.id.news_card_vertical_news_date);
             newsCard = itemView.findViewById(R.id.news_card_vertical);
         }
     }

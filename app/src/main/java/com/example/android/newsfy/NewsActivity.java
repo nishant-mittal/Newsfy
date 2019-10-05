@@ -18,6 +18,7 @@ public class NewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+
         ImageView newsImageView;
         TextView newsTitle;
         final TextView newsAuthor;
@@ -26,7 +27,11 @@ public class NewsActivity extends AppCompatActivity {
         TextView newsWebLink;
         TextView newsDescription;
         FloatingActionButton floatingActionButton;
+
+        //Gets position of news card Clicked
         final int position = getIntent().getExtras().getInt("position");
+
+        //Stores which news was called, World/Local
         int news = getIntent().getExtras().getInt("news");
 
         newsImageView = findViewById(R.id.news_view_image);
@@ -40,6 +45,7 @@ public class NewsActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.floating_action_button);
 
         switch (news) {
+            //If world news was clicked
             case 0:
                 Picasso.get().load(MainActivity.mNews.get(position).getNewsImageURL()).fit().centerInside().into(newsImageView);
                 newsTitle.setText(MainActivity.mNews.get(position).getNewsTitle());
@@ -74,6 +80,7 @@ public class NewsActivity extends AppCompatActivity {
                     }
                 });
                 break;
+            //If local news was clicked
             case 1:
                 Picasso.get().load(MainActivity.mNewsVertical.get(position).getNewsImageURL()).fit().centerInside().into(newsImageView);
                 newsTitle.setText(MainActivity.mNewsVertical.get(position).getNewsTitle());
@@ -109,10 +116,5 @@ public class NewsActivity extends AppCompatActivity {
                 });
                 break;
         }
-
-
-
-
-
     }
 }

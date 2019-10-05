@@ -15,9 +15,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapterHorizontal extends RecyclerView.Adapter<RecyclerViewAdapterHorizontal.ViewHolder> {
+
     private ArrayList<News> newsList;
     private Context mContext;
     private Listener mListener;
+
     public RecyclerViewAdapterHorizontal(Context context,ArrayList<News> newsList) {
         this.newsList = newsList;
         mContext = context;
@@ -41,8 +43,6 @@ public class RecyclerViewAdapterHorizontal extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         News news = newsList.get(i);
     viewHolder.newsTitle.setText(news.getNewsTitle());
-    //viewHolder.newsSource.setText(news.getNewsSource());
-    //viewHolder.newsTime.setText(news.getNewsTime());
     Picasso.get().load(news.getNewsImageURL()).fit().centerInside().into(viewHolder.newsImageURL);
     viewHolder.newsCard.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -61,17 +61,14 @@ public class RecyclerViewAdapterHorizontal extends RecyclerView.Adapter<Recycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView newsImageURL;
-        //TextView newsSource;
         TextView newsTitle;
-        //TextView newsTime;
         CardView newsCard;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             newsImageURL = itemView.findViewById(R.id.news_image_view);
-            //newsSource = itemView.findViewById(R.id.news_source_text_view);
             newsTitle = itemView.findViewById(R.id.news_text_view);
-            //newsTime = itemView.findViewById(R.id.news_time_text_view);
             newsCard = itemView.findViewById(R.id.news_card_horizontal);
         }
     }

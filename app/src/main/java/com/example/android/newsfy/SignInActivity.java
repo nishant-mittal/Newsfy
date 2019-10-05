@@ -38,8 +38,6 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView forgotPassword;
 
-    /*RequestQueue requestQueueVertical;
-    public static ArrayList<News> mNewsVertical = new ArrayList<>();*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -50,11 +50,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Set current date
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime());
         TextView dateTextView = findViewById(R.id.date_text_view);
         dateTextView.setText(currentDate);
 
+        //request news
         requestQueue = Volley.newRequestQueue(this);
         requestNews();
         requestNewsVertical();
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
         recyclerViewVertical.setLayoutManager(manager1);
 
-
+        //When sign out gets clicked
         signOutTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    //Performs an http request for world news
     public void requestNews() {
         String url = "https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -129,8 +131,6 @@ public class MainActivity extends AppCompatActivity {
                                 if (index != -1) {
                                     actualNews = newsContent.substring(0, index);
                                 }
-                                //String newsContentDisplay = newsContent.substring(0, index);
-                                //Log.d("lol", "Data" + "\n" + newsImageURL + "\n" + newsUrl + "\n" + newsTitle + "\n" +formattedDate + "\n" + newsAuthor + "\n" + newsContentDisplay+ "\n" + newsSource);
                                 mNews.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, actualNews, newsSource, newsDescription));
                             }
                             mRecyclerViewAdapterHorizontal = new RecyclerViewAdapterHorizontal(MainActivity.this, mNews);
@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
+    //Performs an http request for local news
     public void requestNewsVertical() {
         String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=9582fd2f638d4fad9c6b03df774b39ae";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -210,8 +211,6 @@ public class MainActivity extends AppCompatActivity {
                                     actualNews = newsContent.substring(0, index);
                                 }
 
-                                //String newsContentDisplay = newsContent.substring(0, index);
-                                //Log.d("lol", "Data" + "\n" + newsImageURL + "\n" + newsUrl + "\n" + newsTitle + "\n" +formattedDate + "\n" + newsAuthor + "\n" + newsContentDisplay+ "\n" + newsSource);
                                 mNewsVertical.add(new News(newsImageURL, newsUrl, newsTitle, formattedDate, newsAuthor, actualNews, newsSource, newsDescription));
                             }
                             mRecyclerViewAdapterVertical = new RecyclerViewAdapterVertical(MainActivity.this, mNewsVertical);
@@ -241,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
+    //Exits app when back button is clicked
     @Override
     public void onBackPressed() {
         super.onBackPressed();
