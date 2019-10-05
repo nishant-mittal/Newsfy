@@ -97,7 +97,7 @@
                             android:fontFamily="@font/poppins_medium"
                             android:paddingStart="20dp"
                             android:paddingTop="10dp"
-                            android:paddingEnd="4dp"
+                            android:paddingEnd="6dp"
                             android:textColor="#2d3436"
                             android:textSize="19sp"
                             tools:text="@string/local_news"/>

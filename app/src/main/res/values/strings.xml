@@ -6,7 +6,9 @@
     <string name="enter_name">Enter Name</string>
     <string name="enter_email">Enter Email!</string>
     <string name="log_in">Log in</string>
+    <string name="reset">Reset</string>
     <string name="check_your_email">Check your Email</string>
+    <string name="reset_password">Reset your password</string>
     <string name="sign_out">Sign Out</string>
     <string name="refresh">Refresh</string>
     <string name="local_news">Local News</string>
@@ -24,6 +26,7 @@
     <string name="check_email">Check Email!</string>
     <string name="confirm_password">Confirm Password!</string>
     <string name="enter_details">Enter Details</string>
+    <string name="try_again">Try again</string>
     <string name="create_free_account">Create Free Account</string>
     <string name="re_enter_password">Re-enter Password</string>
     <string name="create_an_account">Create an account</string>

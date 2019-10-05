@@ -53,14 +53,15 @@ public class SignInActivity extends AppCompatActivity {
 
         forgotPassword = findViewById(R.id.forgot_password_text_view);
 
-
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                Intent intent = new Intent(SignInActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
             }
         });
+
+
     }
 
     @Override
