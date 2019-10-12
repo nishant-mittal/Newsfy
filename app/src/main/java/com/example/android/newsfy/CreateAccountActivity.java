@@ -40,12 +40,12 @@ public class CreateAccountActivity extends AppCompatActivity {
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                disableButton(mCreateAccountButton);
                 mUserName = mName.getText().toString();
                 mUserEmail = mEmail.getText().toString().trim();
                 mUserPassword = mPassword.getText().toString().trim();
                 mUserConfirmPassword = mConfirmPassword.getText().toString().trim();
                 createAccount(mUserName, mUserEmail, mUserPassword, mUserConfirmPassword);
-
             }
         });
     }
@@ -53,18 +53,19 @@ public class CreateAccountActivity extends AppCompatActivity {
     //Create an account for new users
     public void createAccount(String userName, String userEmail, String userPassword, String userConfirmPassword) {
 
-        if (TextUtils.isEmpty(userName))
-            Toast.makeText(getApplicationContext(), R.string.enter_name + "!", Toast.LENGTH_SHORT).show();
-
-        else if (TextUtils.isEmpty(userEmail))
+        if (TextUtils.isEmpty(userName)) {
+            Toast.makeText(getApplicationContext(), R.string.enter_your_name, Toast.LENGTH_SHORT).show();
+            enableButton(mCreateAccountButton);
+        } else if (TextUtils.isEmpty(userEmail)) {
             Toast.makeText(getApplicationContext(), R.string.enter_email, Toast.LENGTH_SHORT).show();
-
-        else if (TextUtils.isEmpty(userPassword))
-            Toast.makeText(getApplicationContext(), R.string.enter_password + "!", Toast.LENGTH_SHORT).show();
-
-        else if (TextUtils.isEmpty(userConfirmPassword))
+            enableButton(mCreateAccountButton);
+        } else if (TextUtils.isEmpty(userPassword)) {
+            Toast.makeText(getApplicationContext(), R.string.enter_your_password, Toast.LENGTH_SHORT).show();
+            enableButton(mCreateAccountButton);
+        } else if (TextUtils.isEmpty(userConfirmPassword)) {
             Toast.makeText(getApplicationContext(), R.string.confirm_password, Toast.LENGTH_SHORT).show();
-
+            enableButton(mCreateAccountButton);
+        }
         else {
             if (userEmail.contains("@")) {
                 if (userPassword.equals(userConfirmPassword)) {
@@ -83,18 +84,30 @@ public class CreateAccountActivity extends AppCompatActivity {
                                         // If sign in fails, display a message to the user.
                                         Log.d(TAG, "createUserWithEmail:failure", task.getException());
                                         Toast.makeText(CreateAccountActivity.this, R.string.account_not_created, Toast.LENGTH_SHORT).show();
+                                        enableButton(mCreateAccountButton);
                                     }
 
                                 }
                             });
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.check_password, Toast.LENGTH_SHORT).show();
+                    enableButton(mCreateAccountButton);
                 }
             } else {
                 Toast.makeText(getApplicationContext(), R.string.check_email, Toast.LENGTH_SHORT).show();
+                enableButton(mCreateAccountButton);
             }
         }
     }
 
+    public void enableButton(Button button) {
+        button.setEnabled(true);
+        button.setBackgroundResource(R.drawable.rounded_button);
+    }
+
+    public void disableButton(Button button) {
+        button.setEnabled(false);
+        button.setBackgroundResource(R.drawable.rounded_button_disabled);
+    }
 
 }

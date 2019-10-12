@@ -32,10 +32,17 @@ public class ResetPasswordActivity extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                resetButton.setEnabled(false);
+                resetButton.setBackgroundResource(R.drawable.rounded_button_disabled);
+
                 email = resetPassword.getText().toString();
 
                 if (email.isEmpty()) {
                     Toast.makeText(getApplicationContext(), R.string.enter_email, Toast.LENGTH_SHORT).show();
+                    resetButton.setEnabled(true);
+                    resetButton.setBackgroundResource(R.drawable.rounded_button);
+
                 } else {
                     mAuth = FirebaseAuth.getInstance();
 
@@ -48,6 +55,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), R.string.try_again, Toast.LENGTH_SHORT).show();
+                                resetButton.setEnabled(true);
+                                resetButton.setBackgroundResource(R.drawable.rounded_button);
                             }
                         }
                     });

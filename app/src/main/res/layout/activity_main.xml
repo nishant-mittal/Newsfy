@@ -49,7 +49,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/local_news"
             android:textColor="@color/black"
@@ -100,7 +100,7 @@
             android:id="@+id/news_recycler_view_vertical"
             android:layout_width="match_parent"
             android:layout_height="2600dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="12dp"/>
     </LinearLayout>
 
 </ScrollView>

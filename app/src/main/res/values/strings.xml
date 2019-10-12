@@ -4,7 +4,9 @@
     <string name="email_address">Email Address</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_name">Enter Name</string>
+    <string name="enter_your_name">Enter Name!</string>
     <string name="enter_email">Enter Email!</string>
+    <string name="enter_your_password">Enter Password!</string>
     <string name="log_in">Log in</string>
     <string name="reset">Reset</string>
     <string name="check_your_email">Check your Email</string>

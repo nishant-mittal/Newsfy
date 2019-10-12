@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +38,7 @@ public class SignInActivity extends AppCompatActivity {
     FirebaseUser user;
     private FirebaseAuth mAuth;
     private TextView forgotPassword;
-
+    private Button loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class SignInActivity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
+        loginButton = findViewById(R.id.login_button);
         mUserEmail = findViewById(R.id.email_sign_in_edit_text);
         mUserPassword = findViewById(R.id.password_sign_in_edit_text);
         mAuth = FirebaseAuth.getInstance();
@@ -75,6 +77,10 @@ public class SignInActivity extends AppCompatActivity {
     }
     //Runs when "log in" button is clicked,signs in the user using the provided email and password
     public void loginClick(View view) {
+
+        loginButton.setEnabled(false);
+        loginButton.setBackgroundResource(R.drawable.rounded_button_disabled);
+
         String email, password;
         email = mUserEmail.getText().toString();
         password = mUserPassword.getText().toString();
@@ -94,6 +100,8 @@ public class SignInActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            loginButton.setEnabled(true);
+                            loginButton.setBackgroundResource(R.drawable.rounded_button);
                         }
                     }
                 });
