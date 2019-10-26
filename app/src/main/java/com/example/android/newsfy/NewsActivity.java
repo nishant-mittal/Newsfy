@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,7 +52,12 @@ public class NewsActivity extends AppCompatActivity {
                 newsTitle.setText(MainActivity.mNews.get(position).getNewsTitle());
                 newsAuthor.setText(MainActivity.mNews.get(position).getNewsAuthor());
                 newsDate.setText(MainActivity.mNews.get(position).getNewsTime());
-                newsContent.setText(MainActivity.mNews.get(position).getNewsContent());
+
+                if (MainActivity.mNews.get(position).getNewsContent().equals("")) {
+                    newsContent.setVisibility(View.GONE);
+                } else {
+                    newsContent.setText(MainActivity.mNews.get(position).getNewsContent());
+                }
                 newsDescription.setText(MainActivity.mNews.get(position).getNewsDescription());
 
                 newsWebLink.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +92,12 @@ public class NewsActivity extends AppCompatActivity {
                 newsTitle.setText(MainActivity.mNewsVertical.get(position).getNewsTitle());
                 newsAuthor.setText(MainActivity.mNewsVertical.get(position).getNewsAuthor());
                 newsDate.setText(MainActivity.mNewsVertical.get(position).getNewsTime());
-                newsContent.setText(MainActivity.mNewsVertical.get(position).getNewsContent());
+
+                if (MainActivity.mNewsVertical.get(position).getNewsContent().equals("")) {
+                    newsContent.setVisibility(View.GONE);
+                } else {
+                    newsContent.setText(MainActivity.mNewsVertical.get(position).getNewsContent());
+                }
                 newsDescription.setText(MainActivity.mNewsVertical.get(position).getNewsDescription());
 
                 newsWebLink.setOnClickListener(new View.OnClickListener() {

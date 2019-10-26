@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -41,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     RecyclerView recyclerViewHorizontal;
     RecyclerView recyclerViewVertical;
-
     private RecyclerViewAdapterHorizontal mRecyclerViewAdapterHorizontal;
     RecyclerViewAdapterVertical mRecyclerViewAdapterVertical;
 
@@ -49,17 +51,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //Set current date
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime());
         TextView dateTextView = findViewById(R.id.date_text_view);
         dateTextView.setText(currentDate);
-
         //request news
+        /*requestQueue = Volley.newRequestQueue(this);
+        requestNews();
+        requestNewsVertical();*/
         requestQueue = Volley.newRequestQueue(this);
         requestNews();
         requestNewsVertical();
+
 
         recyclerViewHorizontal = findViewById(R.id.news_recycler_view_horizontal);
         //recyclerViewHorizontal.setHasFixedSize(true);
@@ -68,11 +72,10 @@ public class MainActivity extends AppCompatActivity {
         signOutTextView = findViewById(R.id.sign_out);
 
         recyclerViewVertical = findViewById(R.id.news_recycler_view_vertical);
-        recyclerViewVertical.setHasFixedSize(true);
+        //recyclerViewVertical.setHasFixedSize(true);
         recyclerViewVertical.setNestedScrollingEnabled(false);
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
         recyclerViewVertical.setLayoutManager(manager1);
-
         //When sign out gets clicked
         signOutTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +86,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
+
 
     //Performs an http request for world news
     public void requestNews() {
-        String url = "https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&api";
+        String url = "https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -135,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             mRecyclerViewAdapterHorizontal = new RecyclerViewAdapterHorizontal(MainActivity.this, mNews);
                             HorizontalSpaceItemDecorator decorator = new HorizontalSpaceItemDecorator(22);
+                            recyclerViewHorizontal.addItemDecoration(decorator);
                             mRecyclerViewAdapterHorizontal.setListener(new RecyclerViewAdapterHorizontal.Listener() {
                                 @Override
                                 public void onClick(int position) {
@@ -144,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             });
-                            recyclerViewHorizontal.addItemDecoration(decorator);
+                            //recyclerViewHorizontal.addItemDecoration(decorator);
                             recyclerViewHorizontal.setAdapter(mRecyclerViewAdapterHorizontal);
 
                         } catch (JSONException e) {
@@ -163,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Performs an http request for local news
     public void requestNewsVertical() {
-        String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=";
+        String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=34c692a3ca6641bf8f65ea2adf2b8de6";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -246,4 +252,5 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         finishAffinity();
     }
+
 }
