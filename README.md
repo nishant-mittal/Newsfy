@@ -1,7 +1,7 @@
 # Newsfy
 A Beautiful news app with no ads for android devices
 
-#Screenshots
+#Screenshots<br />
 [Sign up screen](https://drive.google.com/open?id=0B_KYbvdig_0RejV6cHoxbDNuOVJldE9NUS1HRTdVM3hmSnM4)<br />
 [Create account screen](https://drive.google.com/open?id=0B_KYbvdig_0RcVhUdTBWdFNJaHJrM3o0VndCSnBYWkctcGpJ)<br />
 [News screen](https://drive.google.com/open?id=0B_KYbvdig_0RMzFnQ2FhTDNENUpGbjNoUUlUSUVtb2Vfc1VF)<br />
