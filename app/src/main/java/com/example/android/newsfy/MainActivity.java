@@ -1,17 +1,12 @@
 package com.example.android.newsfy;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,9 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,12 +23,9 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private TextView signOutTextView;
@@ -92,14 +82,13 @@ public class MainActivity extends AppCompatActivity {
 
     //Performs an http request for world news
     public void requestNews() {
-        String url = "https://newsapi.org/v2/top-headlines?sources=the-wall-street-journal&apiKey=c02b29741b1d4f46bb1246a1d4b0e5cf";
+        String url = "https://boiling-hollows-68502.herokuapp.com/";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray articles = response.getJSONArray("articles");
-
                             for (int i = 0; i < articles.length(); i++) {
                                 JSONObject main = articles.getJSONObject(i);
                                 JSONObject source = main.getJSONObject("source");
@@ -169,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Performs an http request for local news
     public void requestNewsVertical() {
-        String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=34c692a3ca6641bf8f65ea2adf2b8de6";
+        String url = "https://boiling-hollows-68502.herokuapp.com/local/IN";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
