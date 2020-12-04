@@ -15,4 +15,4 @@ A Beautiful news app with no ads for android devices
 [Reset password](https://drive.google.com/open?id=0B_KYbvdig_0Ra0NLN2JnNXktODUzN2FlT1RyTld0MW51cU5Z)
 
 # Try the app <br /> 
-[Get apk here](https://drive.google.com/file/d/11o0NFhpaa5IOnYogqMyhBc2hDpO5KLdq/view?usp=sharing)
+[Get apk here](https://drive.google.com/file/d/19bsa00cSeIxUVJT_z3z2geMduppaomy3/view?usp=sharing)
