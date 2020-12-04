@@ -43,7 +43,9 @@ public class RecyclerViewAdapterHorizontal extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         News news = newsList.get(i);
     viewHolder.newsTitle.setText(news.getNewsTitle());
-    Picasso.get().load(news.getNewsImageURL()).fit().centerInside().into(viewHolder.newsImageURL);
+        if (viewHolder.newsImageURL != null) {
+            Picasso.get().load(news.getNewsImageURL()).fit().centerInside().into(viewHolder.newsImageURL);
+        }
     viewHolder.newsCard.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {

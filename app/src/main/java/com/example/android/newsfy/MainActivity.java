@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray articles = response.getJSONArray("articles");
+                            Log.d("yes", "World news: " + articles.length());
                             for (int i = 0; i < articles.length(); i++) {
                                 JSONObject main = articles.getJSONObject(i);
                                 JSONObject source = main.getJSONObject("source");
@@ -165,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray articles = response.getJSONArray("articles");
-
+                            Log.d("yes", "Local news: " + articles.length());
                             for (int i = 0; i < articles.length(); i++) {
                                 JSONObject main = articles.getJSONObject(i);
                                 JSONObject source = main.getJSONObject("source");

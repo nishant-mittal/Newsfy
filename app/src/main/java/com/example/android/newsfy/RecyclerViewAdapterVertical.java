@@ -41,7 +41,9 @@ public class RecyclerViewAdapterVertical extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         News news = mNews.get(i);
         CardView newsCard = viewHolder.newsCard;
-        Picasso.get().load(news.getNewsImageURL()).fit().centerInside().into(viewHolder.newsImage);
+        if (viewHolder.newsImage != null) {
+            Picasso.get().load(news.getNewsImageURL()).fit().centerInside().into(viewHolder.newsImage);
+        }
         viewHolder.newsTitle.setText(mNews.get(i).getNewsTitle());
         viewHolder.newsSource.setText(mNews.get(i).getNewsSource());
 
